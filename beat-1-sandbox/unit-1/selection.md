@@ -19,9 +19,6 @@ https://github.com/codepath/pathreview-ai301-fa26-s1/issues/42
 
 **Verdict output**
 
-[Your skill's live-mode output for this issue, pasted verbatim and ending with the
-fenced JSON verdict block. A summary does not satisfy this field.]
-
 **The verdict must record `accept` for this issue.** Choose an issue your own skill
 accepts. If your skill rejects every candidate you try, that is a signal about your
 rubric rather than about the issues: revise it and re-run — retries are unlimited and a
