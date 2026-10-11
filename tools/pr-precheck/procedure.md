@@ -25,14 +25,14 @@ For each check, pull the evidence from the notes above, using the locations in `
 ## Check execution
 
 1. Run the checks in this order: diff-within-plan, diff-clean, description-matches-diff, tests-shown, meets-repo-asks. The diff is graded against the plan first, because the description's claims and the test evidence are judged against what the diff actually contains.
-2. For each check, compare the gathered quotes with the check's pass condition in `rubric.md`, and grade it `pass`, `fail`, or `unclear` with one line of evidence.
-3. Apply the honest-shortfall wording in each pass condition exactly: a disclosed omission, a stated shortfall, or an explained failing check is graded as that condition says, not as a fail by default.
+2. For each check, compare the gathered quotes with the check's pass condition in `rubric.md`, and grade it `pass`, `fail`, or `unclear` with one line of evidence. When a pass condition has numbered clauses, start the evidence line with the label of the clause that decided the grade (for example `F1:`).
+3. Apply each pass condition's exception and shortfall clauses exactly as written (for example `tests-shown` E1–E2), not as a fail by default.
 4. If the **PR** is missing the part a check reads (for example, no test evidence at all, or no description), grade `fail`: a missing part is the PR's own gap.
 5. Grade `unclear` only when **package-side** evidence the check needs is genuinely absent (for example, no plan context to compare the diff against). Say which evidence is missing.
 6. A check may be graded from the gathered quotes alone. Re-read a part of the package only if the quotes for that check do not settle the grade.
 
 ## Verdict assembly
 
-1. Apply the rubric's verdict rule: accept only if every required check passes; any `fail` or `unclear` on a required check makes the verdict reject.
+1. Apply the verdict rule exactly as `rubric.md` states it.
 2. For a reject, name the first failing check in execution order as the deciding check, and quote its evidence line in the summary.
 3. Output a short summary with one line per check (and, in live mode, any voice-guide notes), then the fenced JSON block from `SKILL.md` as the last thing in the output.

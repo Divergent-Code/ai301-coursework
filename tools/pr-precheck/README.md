@@ -9,4 +9,4 @@ My Unit 4 skill. It grades a pull-request package (the plan, the diff, the PR's 
 - `voice-guide.md`: my rules for writing upstream, carried over from Unit 2, plus three for pull requests (the title says what changed, promise exactly the diff, shortfalls as plain fact)
 - `CONTRACT.md`, `scope.md`: staff-written; scope set to `codepath/pathreview-ai301-fa26-s1`
 
-Final eval: 19/20 (PASS), recorded in `beat-1-sandbox/unit-4/eval-run.txt`. Live result on my own PR draft for #42: accept, 5/5 checks.
+Final eval: 20/20 (PASS), recorded in `beat-1-sandbox/unit-4/eval-run.txt`. Live result on my own PR draft for #42: accept, 5/5 checks.

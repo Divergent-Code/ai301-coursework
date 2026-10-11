@@ -1,33 +1,33 @@
-# eval run written by run_eval.py at 2026-10-07T04:47:13Z
+# eval run written by run_eval.py at 2026-10-11T15:01:58Z
 # model: sonnet (pinned)
 # graded: C:\Users\onika\.claude\skills\pr-precheck
 # packages: 20 scored
-#   SKILL.md  sha256:8a5794e709ef824f
-#   rubric.md  sha256:4b9907fae7d8cdec
-#   procedure.md  sha256:7e5a48efccab7949
-#   evidence-guide.md  sha256:d6d98b57fa71b7f1
+#   SKILL.md  sha256:67c17dd4fa18d482
+#   rubric.md  sha256:8253a23beae9f213
+#   procedure.md  sha256:b5823d75e65e7d18
+#   evidence-guide.md  sha256:596ebf10cf5b2ac1
 #
 grading 20 package(s) with the tool at C:\Users\onika\.claude\skills\pr-precheck, model sonnet, 5 worker(s)...
-  pkg-03: reject
-  pkg-01: reject
-  pkg-02: accept
-  pkg-05: accept
   pkg-04: reject
-  pkg-06: reject
+  pkg-03: reject
+  pkg-02: accept
+  pkg-01: reject
+  pkg-05: accept
   pkg-07: reject
-  pkg-08: accept
   pkg-09: reject
+  pkg-06: reject
   pkg-10: reject
+  pkg-08: accept
+  pkg-11: accept
   pkg-12: reject
-  pkg-11: reject
-  pkg-13: accept
   pkg-14: reject
+  pkg-13: accept
   pkg-15: reject
-  pkg-16: accept
   pkg-17: reject
-  pkg-19: accept
   pkg-18: reject
+  pkg-19: accept
   pkg-20: reject
+  pkg-16: accept
 
 item    category        gold    verdict  agree  note
 pkg-01  standards-wall  reject  reject   yes    
@@ -40,7 +40,7 @@ pkg-07  not-tested      reject  reject   yes
 pkg-08  clear-accept    accept  accept   yes    
 pkg-09  silent-drift    reject  reject   yes    
 pkg-10  not-tested      reject  reject   yes    
-pkg-11  clear-accept    accept  reject   NO     failed: tests-shown
+pkg-11  clear-accept    accept  accept   yes    
 pkg-12  unreviewable    reject  reject   yes    
 pkg-13  clear-accept    accept  accept   yes    
 pkg-14  not-tested      reject  reject   yes    
@@ -51,5 +51,5 @@ pkg-18  unreviewable    reject  reject   yes
 pkg-19  clear-accept    accept  accept   yes    
 pkg-20  standards-wall  reject  reject   yes    
 
-categories: clear-accept 6/7  not-tested 4/4  silent-drift 4/4  standards-wall 2/2  unreviewable 3/3
-agreement: 19/20 scored items  (bar: 18/20: PASS)
+categories: clear-accept 7/7  not-tested 4/4  silent-drift 4/4  standards-wall 2/2  unreviewable 3/3
+agreement: 20/20 scored items  (bar: 18/20: PASS)

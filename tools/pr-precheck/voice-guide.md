@@ -46,14 +46,14 @@ A PR title names the change itself, in the repo's commit style, with the issue n
 The description says what the diff changes and what it leaves out. It never claims more fidelity or coverage than the diff and evidence show.
 
 - Wrong: "Implements the plan exactly and covers all of the issue's checks."
-- Right: "Adds one test file covering the loading, failed, and completed states. Colour contrast is not covered; see below."
+- Right: "Adds one test file covering the loading, failed, and completed states. Color contrast is not covered; see below."
 
 ### Rule: shortfalls as plain fact
 
 State a limitation as a fact with its reason, not as an apology or a hedge.
 
 - Wrong: "Sorry, I couldn't get contrast working, I'll try to look at it more later."
-- Right: "Contrast is not checked: jest-axe disables its colour rules under jsdom."
+- Right: "Contrast is not checked: jest-axe disables its color rules under jsdom."
 
 ## Things I never post
 
