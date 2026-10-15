@@ -55,10 +55,9 @@ happened; these entries are the toolkit's own timeline.
 All four entries are graded. Keep every heading below, and fill each
 one in the week it belongs to.
 
-**Unit 5: [one line on the tool work]**
+**Unit 5: installed the scout, ran two scans, and added rubric rules (2026-10-14)**
 
-[2-4 sentences: what you built (the scout, your strategy), what broke
-or fell short, what changed because of it.]
+This week I installed the scout, updated my profile, chose a query and ranking rules, ran two scans, and graded my picks. Two things broke: my quoted query returned zero results, and the scout accepted tiny new repos. So I unquoted the words in my query, and added a star floor and claim rules to my rubric.
 
 **Unit 6: [one line on the tool work]**
 
