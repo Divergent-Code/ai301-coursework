@@ -8,9 +8,8 @@ format criteria grade exactly that. Your course repo link is the whole submissio
 files and no evidence uploads are part of Assignment 5.
 
 **Contribution Number:** [1]
-**Student:** [Student name]
-**GitHub Username:** [your GitHub username, exactly as it appears on your profile - no @, no
-profile URL. Your comments upstream are identified by this name.]
+**Student:** Onika Dye-Flynn
+**GitHub Username:** Divergent-Code
 **Issue:** [GitHub issue link]
 **Pull Request:** [GitHub PR link, once opened]
 
@@ -57,7 +56,7 @@ one in the week it belongs to.
 
 **Unit 5: installed the scout, ran two scans, and added rubric rules (2026-10-14)**
 
-This week I installed the scout, updated my profile, chose a query and ranking rules, ran two scans, and graded my picks. Two things broke: my quoted query returned zero results, and the scout accepted tiny new repos. So I unquoted the words in my query, and added a star floor and claim rules to my rubric.
+This week I installed the scout, updated my profile, chose a query and ranking rules, ran two scans, and graded my picks. Two things broke: my quoted query returned zero results with exit code 0, and 3 of the scout's 4 accepts were tiny new repos with 0-3 stars. So I unquoted the words in my query, which took it from 0 to 100 results, and added a 10-star floor and claim rules to my rubric. In my second scan the star floor rejected 3 of the tiny repos, and my rubric still scored 20/20 on the Unit 1 eval.
 
 **Unit 6: [one line on the tool work]**
 
