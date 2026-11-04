@@ -1,4 +1,4 @@
-# Contribution: [Issue Title]
+# Contribution: Remote files: Dropbox could use nicer error message when unconfigured
 
 Path: `beat-2-contribution/contribution-story.md`
 
@@ -10,7 +10,7 @@ files and no evidence uploads are part of Assignment 5.
 **Contribution Number:** [1]
 **Student:** Onika Dye-Flynn
 **GitHub Username:** Divergent-Code
-**Issue:** [GitHub issue link]
+**Issue:** https://github.com/galaxyproject/galaxy/issues/15551
 **Pull Request:** [GitHub PR link, once opened]
 
 One repository, built across units 5 to 8, telling the whole story of your real
