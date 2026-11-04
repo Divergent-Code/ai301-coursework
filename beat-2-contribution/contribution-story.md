@@ -78,24 +78,37 @@ drafted, what you did with the draft.]
 
 ## Why I Chose This Issue
 
-[1-2 paragraphs in your own words: how you searched, what your scan
-surfaced, what your scout's verdict said, why this issue fits your
-profile, and what you hope to learn. If your scout's verdict on it
-was reject and you chose it anyway, say so here and say why; choosing
-against your own tool silently is what loses points. Close with an
-honest read of the tool itself: where the scout fell short on a real
-wild search and what you changed or would change, or what convinced
-you it held up. **Record the link to your claim comment in this section too.**
-Not claimed yet? Write `claim pending` and today's date where the link goes,
-and add the link the moment your claim lands.]
+This was one of my site picks, and my scout accepted it, with a moderate
+difficulty note. I scanned GitHub 7 times and graded my picks. One scan
+surfaced NVDA #21022, so I first chose that issue, and my instructor
+said yes. Then someone opened a PR for it, so I came back to galaxy. I
+treated the scout's verdict as evidence, and the final call was mine.
+This issue fits my HCI focus, because clear error messages are what I
+care about. The error shows a raw Python object that tells a user
+nothing. I hope to learn how to trace an error from the screen back to
+the server.
+
+The scout fell short in two ways. It said galaxy's license was Other,
+but the file says MIT, so I now read the file, not the field. And a
+verdict is a snapshot: it accepted NVDA on Oct 20, and it was taken by
+Oct 26. I changed my search to repo-first queries with a dated skip
+list, and I patched the scope check to scope-feasible, which scored 19
+of 20 on the eval.
+
+Claim comment: https://github.com/galaxyproject/galaxy/issues/15551#issuecomment-6644678608
 
 **Toolkit**
 
-- Tool: issue-scout (your scout: your search strategy, your rubric),
-  and how you used it
-- What it produced: [the scan and its verdict on this issue, described]
-- Difficulties: [where it fell short, or "none met" if none did]
-- What changed: [what you patched or would update, or "nothing"]
+- Tool: issue-scout (my search strategy and rubric). I scanned GitHub 7
+  times, graded my picks, and treated its verdict as evidence; the final
+  call was mine.
+- What it produced: 7 scans, and a verdict of accept on this issue with
+  a moderate difficulty note.
+- Difficulties: it said galaxy's license was Other when the file says
+  MIT, and a verdict is a snapshot: it accepted NVDA on Oct 20, and it
+  was taken by Oct 26.
+- What changed: repo-first queries, a dated skip list, and a scope check
+  patched to scope-feasible (eval 19 of 20).
 
 ---
 
