@@ -387,23 +387,44 @@ set token still gets past the new code.
 
 ## Implementation Notes
 
-[A running log, added to as you work. Date each entry. What you
-built, decisions you made when you made them, wrong turns included.]
+**2026-10-28**
 
-**[Date]**
+Went back to galaxy #15551 after someone opened a PR on NVDA #21022.
+Read galaxy's rules: bug fixes go to the oldest supported release that
+has the problem, not `dev`, and that's `release_25.1`.
 
-[Entry]
+**2026-11-04: reproduction**
 
-**[Date]**
+Moved everything into WSL, because galaxy's docs only cover Linux and
+macOS. The screenshot's error was gone on both branches, so I posted
+that on the issue and chose a small wording fix instead of dropping the
+PR.
 
-[Entry]
+**2026-11-04: the fix**
+
+Built the empty-token check and its test as one commit on
+`fix/15551-dropbox-no-token-message`. Ship-gate's installer needs a
+normal clone, so I built in `~/galaxy`, not the second folder I used for
+the repro.
+
+Wrong turns: `run_tests.sh` failed with no pip, because `dev`'s
+environment was built without it, so I built a new one. Moving the
+`database` folder removed a tracked file. `git status` caught it, I
+restored it, and it isn't in the commit.
+
+Also updated the memory file's commands now that they've run. The Unit 6
+entry above says they were marked not run, which was true at the time.
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: Claude Code, which ran the commands in WSL while I chose the
+  approach at each step.
+- What it produced: the branch, the commit and the saved outputs.
+- Difficulties: the Windows and WSL boundary. Git Bash rewrote a
+  `/mnt/c` path once, and my findings comment went through Windows
+  `claude`, not WSL's.
+- What changed: those commands go through PowerShell or the Ubuntu
+  window now.
 
 ---
 
