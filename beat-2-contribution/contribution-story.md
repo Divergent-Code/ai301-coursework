@@ -58,11 +58,9 @@ one in the week it belongs to.
 
 This week I installed the scout, updated my profile, chose a query and ranking rules, ran two scans, and graded my picks. Two things broke: my quoted query returned zero results with exit code 0, and 3 of the scout's 4 accepts were tiny new repos with 0-3 stars. So I unquoted the words in my query, which took it from 0 to 100 results, and added a 10-star floor and claim rules to my rubric. In my second scan the star floor rejected 3 of the tiny repos, and my rubric still scored 20/20 on the Unit 1 eval.
 
-**Unit 6: [one line on the tool work]**
+**Unit 6: installed the voice guard and wrote galaxy's memory file (2026-11-04)**
 
-[2-4 sentences: the voice-guard, the repo-memory file. What broke or
-fell short, and what changed because of it. "Nothing broke" counts when
-it is true - say how you know.]
+I installed the voice guard and wrote a 54-line memory file for galaxy with its conventions, the subsystem my issue touches, and its commands. A curly quote crashed the guard, and a crash lets the post through, so I fixed it with `PYTHONUTF8=1`. The guard also stopped my claim once, because a chained `; echo` was read as the filename, and the retry passed. The memory file's test and lint commands aren't confirmed yet, so they're marked not run.
 
 **Unit 7: [one line on the tool work]**
 
