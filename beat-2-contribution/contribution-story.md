@@ -345,17 +345,43 @@ set token still gets past the new code.
 
 ## Testing Strategy
 
-[What observable checks prove the fix: your reproduction steps re-run
-against the built change (before and after), and the repo's own test
-suite or checks with the outcome shown. "Tests pass" with nothing
-observable named is not a strategy.]
+**Before and after.** I re-ran my reproduction's request, `GET
+/api/remote_files?target=gxfiles://dropbox1/`, with no token set.
+
+- Before, on `07d653f`: HTTP 403, "Permission Denied. Reason: OAuth2
+  access token or refresh token or app key/secret must be set. Please
+  check your credentials in your preferences for Dropbox files
+  (configure access in user preferences)."
+- After, on `754e2d6`: HTTP 403, "No Dropbox access token is set. Add
+  one in your user preferences."
+
+**New test.** `test_no_access_token_says_so` in
+`test/unit/files/test_dropbox.py` needs no real token. Without the fix:
+1 failed, 1 skipped. With the fix: 1 passed, 1 skipped.
+
+**Repo checks, with the fix.**
+
+- `pytest test/unit/files/`: 94 passed, 16 skipped.
+- `bash run_tests.sh -u test/unit/files/test_dropbox.py`: 1 passed, 1
+  skipped.
+- `ruff check .`: all checks passed.
+- `isort --check-only`, `black --check` and `flake8` on the two changed
+  files: nothing flagged.
+- A set token still gets past the new check: `_open_fs` returned
+  `DropboxFS`.
+
+**Still untested.** The web page, and a real bad token against Dropbox.
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: pytest and galaxy's lint tools, run on my branch, with the
+  before and after output saved in `test_evidence.md`.
+- What it produced: the results above.
+- Difficulties: the first failure wasn't the test: the runner stopped
+  before running anything, so I read the output, not the exit code.
+  Galaxy's existing Dropbox test also skips without a real token.
+- What changed: I built a new environment for this branch, and wrote a
+  test that needs no real token.
 
 ---
 
