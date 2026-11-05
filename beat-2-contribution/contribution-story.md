@@ -143,31 +143,109 @@ Claim comment: https://github.com/galaxyproject/galaxy/issues/15551#issuecomment
 
 **Environment Setup**
 
-[What a stranger would need to stand this up: your operating system,
-the relevant versions (language, runtime, package manager, the project
-itself), and how you set the project up. Then the challenges you faced
-and how you solved them, or that none came up.]
+- **OS:** Windows 11 Home, with WSL 2 running Ubuntu 24.04.4 LTS. Everything ran inside Ubuntu.
+- **Tools:** Python 3.12.3, uv 0.13.7, git 2.56.0.
+- **Galaxy `dev`:** commit `7e16f44` (version 27.0.dev0), with dropboxdrivefs 1.4.1 and dropbox 12.2.4.
+- **Galaxy `release_25.1`:** commit `07d653f` (version 25.1.4.dev0), with fs.dropboxfs 1.0.9 and dropbox 12.2.4. This is the oldest supported release.
+- **The issue's version:** the issue is from February 2023 and names no version, so these are much newer.
+- **Setup:** I forked galaxy and cloned my fork to `~/galaxy`, then added `release_25.1` as a second folder:
+
+  ```
+  git clone https://github.com/Divergent-Code/galaxy.git ~/galaxy
+  cd ~/galaxy
+  git remote add upstream https://github.com/galaxyproject/galaxy.git
+  git fetch upstream dev release_25.1
+  git worktree add --detach ~/galaxy-25.1 upstream/release_25.1
+  ```
+
+- **Challenges:**
+  - Galaxy's docs only cover Linux and macOS, and I'm on Windows, so I moved everything into WSL.
+  - My first request used the wrong address (`dropbox://dropbox1/`). Its 400 error wasn't the bug. Galaxy's own plugin list gives the right one, `gxfiles://dropbox1`.
+  - I skipped the web client build, so I tested the API only. I did not check the web page.
 
 **Steps to Reproduce**
 
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
+Run these from the top folder of each branch's copy (`~/galaxy`, then `~/galaxy-25.1`).
+
+1. Create `config/file_sources_conf.yml`:
+
+   ```yaml
+   - type: dropbox
+     id: dropbox1
+     label: Dropbox files (configure access in user preferences)
+     doc: Your Dropbox files - configure an access token via the user preferences
+     access_token: ${user.preferences['dropbox|access_token']}
+   ```
+
+2. Create `config/user_preferences_extra_conf.yml`:
+
+   ```yaml
+   preferences:
+       dropbox:
+           description: Your Dropbox account
+           inputs:
+               - name: access_token
+                 label: Dropbox access token
+                 type: password
+                 required: False
+   ```
+
+3. Start the server, with any string as the admin key, and wait for it to answer on port 8080:
+
+   ```
+   GALAXY_SKIP_CLIENT_BUILD=1 GALAXY_CONFIG_OVERRIDE_BOOTSTRAP_ADMIN_API_KEY=<admin key> sh run.sh
+   ```
+
+4. Create a test user and an API key for them. Never set a Dropbox token:
+
+   ```
+   curl -sS -X POST http://localhost:8080/api/users -H "x-api-key: <admin key>" -H "Content-Type: application/json" -d '{"username":"repro","email":"repro@example.org","password":"<any password>"}'
+   curl -sS -X POST http://localhost:8080/api/users/<id from the last reply>/api_key -H "x-api-key: <admin key>"
+   ```
+
+5. Check the version, then list the Dropbox root as that user:
+
+   ```
+   curl -sS http://localhost:8080/api/version
+   curl -sS -w '\nHTTP status: %{http_code}\n' "http://localhost:8080/api/remote_files?target=gxfiles://dropbox1/" -H "x-api-key: <user key>"
+   ```
+
+6. **Observed result:** see the evidence below. Expected, going by the issue: the raw `FileSourcePath(...)` error in its screenshot.
 
 **Reproduction Evidence**
 
-- **Commit showing reproduction:** [link to commit in your fork]
-- **Screenshots/logs:** [if applicable]
-- **My findings:** [what you discovered during reproduction; an
-  honest, evidenced cannot-reproduce that led you to re-pick or ask
-  the maintainer belongs here and costs you nothing]
+- **Commit showing reproduction:** none. I changed no code, only git-ignored config files.
+- **Output on `dev` (`7e16f44`):**
+
+  ```
+  {"version_major":"27.0","version_minor":"dev0"}
+  {"err_msg":"Permission Denied. Reason: OAuth2 access token or refresh token or app key/secret must be set. Please check your credentials in your preferences for Dropbox files (configure access in user preferences).","err_code":403001}
+  HTTP status: 403
+  ```
+
+- **Output on `release_25.1` (`07d653f`):**
+
+  ```
+  {"version_major":"25.1","version_minor":"4.dev0"}
+  {"err_msg":"Permission Denied. Reason: OAuth2 access token or refresh token or app key/secret must be set. Please check your credentials in your preferences for Dropbox files (configure access in user preferences).","err_code":403001}
+  HTTP status: 403
+  ```
+
+- **My findings:** the raw object error is gone on both branches, and both return the same 403 message. That message still has jargon, and "Permission Denied" is odd for something that just isn't set up.
+- **Limit:** the issue doesn't say how its Dropbox source was configured, so my setup may differ.
+- **Findings comment:** https://github.com/galaxyproject/galaxy/issues/15551#issuecomment-6647261266
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: repro-check, which graded my claim and repro report together
+  before I moved the report here.
+- What it produced: accept, with all six checks passing. A
+  cannot-reproduce counts when the output is pasted.
+- Difficulties: it can't read the screenshot, it couldn't find my
+  scout's output in WSL, and it used a subagent to read
+  `CONTRIBUTING.md`, which my rules don't allow unasked.
+- What changed: nothing in the report. The screenshot text was checked
+  separately in the browser.
 
 ---
 
