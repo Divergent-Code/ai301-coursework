@@ -265,29 +265,78 @@ Run these from the top folder of each branch's copy (`~/galaxy`, then `~/galaxy-
 
 **Analysis**
 
-[Your analysis of the root cause: what is causing the issue, traced
-to the files and functions involved.]
+On `release_25.1`, listing Dropbox goes through `_open_fs` in
+`lib/galaxy/files/sources/dropbox.py`, which calls
+`DropboxFS(access_token=context.config.access_token)`. An empty token
+fails inside the Dropbox library with `BadInputException`, and galaxy
+repeats its error text: the `except` block finds "OAuth2" in the text
+and wraps it in `AuthenticationRequired`. So the user sees it labelled
+Permission Denied, when nothing was denied. It just isn't set up.
+
+I checked this by resolving the file source directly on `release_25.1`
+(`07d653f`), with the Dropbox preference empty, and calling `_open_fs`:
+
+```
+access_token repr: ''
+_open_fs raised: AuthenticationRequired | Permission Denied. Reason: OAuth2 access token or refresh token or app key/secret must be set. Please check your credentials in your preferences for
+caused by: dropbox.dropbox_client.BadInputException
+```
+
+The server log on `dev` (`7e16f44`) shows the same exception raised
+under `DropboxDriveFileSystem(token=context.config.access_token)` in
+`dropbox.py`:
+
+```
+dropbox.dropbox_client.BadInputException: OAuth2 access token or refresh token or app key/secret must be set
+```
 
 **Proposed Solution**
 
-[High-level description of your fix approach, and what you are
-deliberately NOT changing.]
+At the top of `_open_fs`, before anything connects, check for an empty
+token and raise `AuthenticationRequired` with this message: "No Dropbox
+access token is set. Add one in your user preferences." The status stays
+403. I won't change the bad-token message, the base classes, other file
+sources, or the web client.
+
+**Unknowns**
+
+- I've only tested through the API, not the web page.
+- `dev` has different code here (`DropboxDriveFileSystem`), so merging a
+  fix forward from `release_25.1` may need a separate change.
+- No maintainer has answered whether a plainer message is still wanted.
+  I'm following the issue's original suggestion unless one says
+  otherwise.
+- The test helper raises `KeyError` when the preference key is missing
+  altogether, so the test sets it to empty. The real API case, where the
+  user never set it, reached the same `BadInputException`.
 
 **Implementation Plan**
 
-1. [Modify file X to do Y]
-2. [Add or change Z]
-3. [Update tests]
+1. Make the branch `fix/15551-dropbox-no-token-message` from
+   `upstream/release_25.1`.
+2. In `lib/galaxy/files/sources/dropbox.py`, add the empty-token check
+   to `_open_fs`.
+3. In `test/unit/files/test_dropbox.py`, add a test that lists Dropbox
+   with an empty token and expects the new message. It needs no real
+   token and no network. Run it without the fix to show it fails, then
+   with the fix.
+4. Re-run the reproduction steps through the API, and run `make
+   diff-format`, `ruff check .` and the unit tests in
+   `test/unit/files/`.
 
-[Record deviations here as they happen: what changed mid-build and
-why. A recorded deviation is honest work; silent drift is not.]
+Deviations: none so far.
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: plan-check, which graded `plan.md` and my draft comment against
+  the issue and my repro report. I didn't post the comment.
+- What it produced: reject on the first version, then accept, with all
+  seven checks passing.
+- Difficulties: it rejected the first version because the plan stated
+  the token's value and the exception type as fact, and my repro only
+  showed the final message.
+- What changed: I called `_open_fs` directly, put that output in the
+  Analysis, and added an Unknowns section.
 
 ---
 
