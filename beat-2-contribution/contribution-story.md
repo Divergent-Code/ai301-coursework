@@ -114,26 +114,40 @@ Claim comment: https://github.com/galaxyproject/galaxy/issues/15551#issuecomment
 
 **Problem Description**
 
-[In your own words, what is broken or missing?]
+Listing Dropbox with no token used to show a raw Python object, and
+that's now gone. What's left is the wording.
 
 **Expected Behavior**
 
-[What should happen?]
+It should say no token is set and point to preferences, without
+"Permission Denied" or OAuth2 wording.
 
 **Current Behavior**
 
-[What actually happens?]
+With no token set, `dev` (`7e16f44`) and `release_25.1` (`07d653f`) both
+return HTTP 403: "Permission Denied. Reason: OAuth2 access token or
+refresh token or app key/secret must be set. Please check your
+credentials in your preferences for Dropbox files (configure access in
+user preferences)."
 
 **Affected Components**
 
-[Which parts of the codebase are involved?]
+- `lib/galaxy/files/sources/dropbox.py`: `_open_fs` turns the "OAuth2"
+  error into this message.
+- `lib/galaxy/files/sources/_fsspec.py` on `dev` and
+  `lib/galaxy/files/sources/_pyfilesystem2.py` on `release_25.1`: the
+  base classes, so a fix may differ by branch.
+- `lib/galaxy/managers/remote_files.py`: the listing behind the API.
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: Claude Code, reading the Dropbox code path on `dev` with me.
+- What it produced: the file list above, and a note that the friendly
+  message only covers an "OAuth2" error raised while connecting.
+- Difficulties: reading the code couldn't say whether the no-token case
+  reaches that message. Only running it could.
+- What changed: I reproduced it on both branches instead of relying on
+  the read.
 
 ---
 
