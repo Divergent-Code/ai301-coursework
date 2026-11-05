@@ -324,7 +324,10 @@ sources, or the web client.
    diff-format`, `ruff check .` and the unit tests in
    `test/unit/files/`.
 
-Deviations: none so far.
+Deviations: I ran `isort --check-only` and `black --check` instead of
+`make diff-format`, because that command changes files and I only wanted
+to check them. I also added `flake8`, `run_tests.sh` and a check that a
+set token still gets past the new code.
 
 **Toolkit**
 
