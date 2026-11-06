@@ -430,27 +430,38 @@ entry above says they were marked not run, which was true at the time.
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when opened]
+**PR Link:** https://github.com/galaxyproject/galaxy/pull/24755
 
-**PR Description:** [what the PR says; much of the content above
-adapts into it]
+**PR Description:** With no Dropbox token set, listing Dropbox returned "Permission Denied"
+with OAuth2 wording. It now says no token is set and where to add one,
+with the same 403 status. The description links the issue with `Fixes
+#15551`, notes that the screenshot's original error no longer appears,
+and shows the before and after output. It also names the cause, says
+what isn't tested, and discloses AI use. Its testing section lists the
+new test failing without the fix and passing with it, the file-source
+tests, the lint and format checks, why `make diff-format` wasn't run,
+and manual API steps.
 
 **Maintainer Feedback:**
 
-- [Date]: [feedback received, or "none yet"; silence is a normal
-  state and costs you nothing]
-- [Date]: [how you addressed it]
+- 2026-11-05: none yet
 
-**Status:** [Awaiting review / Iterating / Merged / Closed. The
-status is a fact you record, never a grade: the PR is graded as
-opened.]
+**Status:** Awaiting review
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: ship-gate, which runs my manifest's four checks and then my
+  pr-precheck before `gh pr create`. I ran it by hand first, then opened
+  the PR through Claude Code.
+- What it produced: all four checks passed on both runs. My pr-precheck
+  rejected the first run and passed the second.
+- Difficulties: on the first run my own pr-precheck rejected the
+  evidence. It didn't say why `make diff-format` was skipped, and flake8
+  only said "flake8 done". Its installer also needs a normal clone, so
+  my second galaxy folder wouldn't work.
+- What changed: I showed each check's command and exit code and said why
+  `make diff-format` wasn't run, and the second run passed. The hook
+  then let the PR through on that pass without running again.
 
 ---
 
