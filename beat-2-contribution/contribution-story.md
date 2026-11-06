@@ -62,10 +62,9 @@ This week I installed the scout, updated my profile, chose a query and ranking r
 
 I installed the voice guard and wrote a 54-line memory file for galaxy with its conventions, the subsystem my issue touches, and its commands. A curly quote crashed the guard, and a crash lets the post through, so I fixed it with `PYTHONUTF8=1`. The guard also stopped my claim once, because a chained `; echo` was read as the filename, and the retry passed. The memory file's test and lint commands aren't confirmed yet, so they're marked not run.
 
-**Unit 7: [one line on the tool work]**
+**Unit 7: installed the ship-gate and opened my PR through it (2026-11-05)**
 
-[2-4 sentences: the ship-gate and your gate manifest. What it produced
-on your real branch, what fought you, what changed because of it.]
+I installed the ship-gate and wrote a manifest of four galaxy checks: the file-source tests, ruff, black and isort. All four passed, but my pr-precheck rejected the evidence on the first run, so I fixed it and the second run passed. The ship-gate runs checks through `cmd.exe` on Windows, so I ran everything inside WSL.
 
 **Unit 8: [one line on the tool work]**
 
