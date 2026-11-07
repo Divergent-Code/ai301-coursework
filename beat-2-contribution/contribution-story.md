@@ -367,6 +367,8 @@ set token still gets past the new code.
   files: nothing flagged.
 - A set token still gets past the new check: `_open_fs` returned
   `DropboxFS`.
+- CI doesn't install the optional `fs.dropboxfs` package, so the new
+  test skips there, the same way galaxy's Azure and S3 tests do.
 
 **Still untested.** The web page, and a real bad token against Dropbox.
 
@@ -413,6 +415,19 @@ restored it, and it isn't in the commit.
 Also updated the memory file's commands now that they've run. The Unit 6
 entry above says they were marked not run, which was true at the time.
 
+**2026-11-05: the PR**
+
+Opened PR #24755 through the ship-gate. My pr-precheck rejected the
+first run's evidence, and the second run passed.
+
+**2026-11-06: CI**
+
+After a maintainer approved CI, two jobs failed on my new test. It needs
+the optional `fs.dropboxfs` package, which CI doesn't install, and my
+local environment had it. plan-check had warned about this, and I didn't
+test that case. I added `pytest.importorskip`, as galaxy's own Azure and
+S3 tests do, and pushed it as a second commit.
+
 **Toolkit**
 
 - Tool: Claude Code, which ran the commands in WSL while I chose the
@@ -438,7 +453,8 @@ and shows the before and after output. It also names the cause, says
 what isn't tested, and discloses AI use. Its testing section lists the
 new test failing without the fix and passing with it, the file-source
 tests, the lint and format checks, why `make diff-format` wasn't run,
-and manual API steps.
+manual API steps, and why the new test
+skips in CI.
 
 **Maintainer Feedback:**
 
