@@ -467,16 +467,24 @@ and manual API steps.
 
 **Technical Skills Gained**
 
-[What you learned technically, named concretely.]
+Running a big Python project inside WSL from Windows: galaxy only
+documents Linux and macOS, so its server, tests and my tools all ran in
+Ubuntu. Writing a test that fails without the fix and passes with it:
+`test_no_access_token_says_so`.
 
 **Challenges Overcome**
 
-[What was hard and how you solved it; point at the real events, the
-Toolkit blocks above are full of them.]
+The bug I claimed was already gone. The screenshot's raw object error no
+longer appeared on `dev` or `release_25.1`, so I found what was left, a
+message calling a missing token "Permission Denied", and fixed the
+wording. My own pr-precheck also rejected my evidence on the first
+ship-gate run. I added each check's exit code and the reason I skipped
+`make diff-format`, and the second run passed.
 
 **What I'd Do Differently Next Time**
 
-[Reflection on your process.]
+Reproduce before claiming. I would have found sooner that the error was
+already gone.
 
 ---
 
