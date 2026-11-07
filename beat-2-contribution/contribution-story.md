@@ -490,10 +490,24 @@ already gone.
 
 ## Resources Used
 
-[What actually helped, not a reading list. List things this story
-already shows you using: the doc you followed to set the environment
-up, the thread that explained the bug, the person who answered you.
-One real entry beats ten plausible ones.]
-
-- [Link to documentation that helped]
-- [Discussion, issue, or post that helped]
+- [galaxy #15551](https://github.com/galaxyproject/galaxy/issues/15551):
+  the issue and its screenshot, which gave me the error to reproduce.
+- [galaxy's
+  CONTRIBUTING.md](https://github.com/galaxyproject/galaxy/blob/dev/CONTRIBUTING.md):
+  which branch bug fixes target, and the commit message style.
+- [galaxy's
+  SECURITY.md](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY.md):
+  which releases are still supported, which made `release_25.1` the
+  target.
+- [galaxy's
+  test/TESTING.md](https://github.com/galaxyproject/galaxy/blob/dev/test/TESTING.md):
+  how to run the tests.
+- [galaxy #24513](https://github.com/galaxyproject/galaxy/pull/24513): a
+  recent remote-files fix on a release branch, which I used as a model
+  for my PR.
+- [galaxy's
+  test_azure.py](https://github.com/galaxyproject/galaxy/blob/release_25.1/test/unit/files/test_azure.py):
+  the `importorskip` pattern I used when CI didn't have `fs.dropboxfs`.
+- The course's [Unit 7](https://github.com/codepath/ai301-unit7-starter)
+  and [Unit 8](https://github.com/codepath/ai301-unit8-starter)
+  materials: the ship-gate and PR monitor install guides.
