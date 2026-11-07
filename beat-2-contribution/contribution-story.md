@@ -66,10 +66,9 @@ I installed the voice guard and wrote a 54-line memory file for galaxy with its 
 
 I installed the ship-gate and wrote a manifest of four galaxy checks: the file-source tests, ruff, black and isort. All four passed, but my pr-precheck rejected the evidence on the first run, so I fixed it and the second run passed. The ship-gate runs checks through `cmd.exe` on Windows, so I ran everything inside WSL.
 
-**Unit 8: [one line on the tool work]**
+**Unit 8: installed the PR monitor and wrote my playbook (2026-11-05)**
 
-[2-4 sentences: the PR-monitor and your playbook. What it read, what it
-drafted, what you did with the draft.]
+The PR monitor read my PR and drafted WAIT, with no nudge until about Nov 13, so I kept it off the thread. It flagged the merge state as UNSTABLE, which turned out to be 24 CI runs waiting for a maintainer's approval, normal for a first PR. GitHub also calls core developers "CONTRIBUTOR", so I had to filter them out to find real outside PRs, and I based my 7-day threshold on 4 of those instead of GitHub's label.
 
 ---
 
