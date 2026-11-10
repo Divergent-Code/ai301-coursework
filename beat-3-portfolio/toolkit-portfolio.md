@@ -241,16 +241,40 @@ actually happened afterwards. A beat about something that did not work counts fu
 beat, and when the work happened never moves this score.
 
 **Beat 1**
-Date: [a date, or a month and year]
-Friction: [what was going wrong, and how you noticed]
-Change: [what you changed because of it]
-Result: [what happened afterwards, or the word none]
+Date: 2026-09-24
+Friction: My issue-select eval's first full run scored 17/20. Its results showed it accepted issue-20, which a bot opened and no maintainer had commented on or labeled.
+Change: I added a rule that fails an issue opened by a bot when no maintainer has commented and it has no labels.
+Result: By run 3 it rejected issue-20, citing the new rule, and scored 20/20.
 
 **Beat 2**
-Date: [a date, or a month and year]
-Friction: [what was going wrong, and how you noticed]
-Change: [what you changed because of it]
-Result: [what happened afterwards, or the word none]
+Date: 2026-09-30
+Friction: My repro-check eval's first full run passed pkg-20, whose repo requires AI disclosure. The grader read the drafts' silence as "no AI was used".
+Change: I added the principle that work in this course is AI-assisted, so a missing disclosure fails.
+Result: Full run 2 scored 20/20, and pkg-20 was the only row that changed.
+
+**Beat 3**
+Date: 2026-10-16
+Friction: Searching issue titles for HCI words gave noisy picks, like "usability predicates" in a finance library. I saw it when I simulated the ranking.
+Change: I graded issues carrying HCI tags on the course's Issue Selection site instead.
+Result: The scout accepted galaxy #15551, the issue I went on to contribute to.
+
+**Beat 4**
+Date: 2026-11-04
+Friction: plan-check rejected my galaxy plan on `certainty-earned`. The plan stated `BadInputException` as fact, and my repro showed only the final 403 message.
+Change: I called `_open_fs` directly, which showed the token was `''` and the error started as `BadInputException`, and put that output in the plan.
+Result: The second run accepted the plan. My Assignment 5 grader later named that step as part of my strongest habit.
+
+**Beat 5**
+Date: 2026-11-05
+Friction: The ship-gate blocked my PR at 19:18. My pr-precheck said my evidence gave no reason for skipping `make diff-format`, and reported flake8 only as "flake8 done".
+Change: I added the reason and each check's exit code to my evidence.
+Result: The gate passed at 19:19, and PR #24755 opened through it at 19:24.
+
+**Beat 6**
+Date: 2026-11-06
+Friction: GitHub notifications showed two CI jobs failing on my new test. CI doesn't install `fs.dropboxfs`, which plan-check had warned about on 2026-11-04.
+Change: I added `pytest.importorskip("fs.dropboxfs")`, the way galaxy's Azure and S3 tests do.
+Result: Locally, the test passes with the package and skips without it. CI hasn't re-run yet, because it's waiting for a maintainer to approve it.
 
 Copy the beat shape above for as many beats as your term had.
 
