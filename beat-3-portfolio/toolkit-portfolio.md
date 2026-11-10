@@ -284,12 +284,21 @@ What the toolkit as a whole still does not do, and what you would
 build or change next. Write this section last; it will be better
 after the rest.
 
-[The honest limits, and what comes next, in your own sentences.]
+My toolkit still has two gaps. Nothing checks the CI environment: every
+check ran in my local venv, which had `fs.dropboxfs`, and CI didn't, so
+my new test failed there on 2026-11-06. Nothing looks at the repo's
+existing code before I write mine, either. The one thing my Assignment 5
+grader said to tighten was to copy the two or three closest similar
+files first, and none of my tools prompts that.
+
+Next, I'll add a CI check to my ship-gate manifest: run the new test
+with optional packages blocked, the way I did by hand on 2026-11-06.
 
 **Tool limits.** One line per featured tool, in the same order as the entries above, naming
 where that tool still stops or what it still gets wrong. A small honest limit is full credit;
 "none really" is not a limit. If a tool genuinely has none you can name, write `none` after
 its label rather than deleting the line.
 
-issue-scout: [where this tool still stops, in plain words, or the word none]
-[tool name]: [where this tool still stops, in plain words, or the word none]
+issue-scout: It takes GitHub's license label at face value. It reported galaxy's license as "Other" three times, because GitHub can't classify it, while galaxy's LICENSE.txt says MIT.
+pr-precheck: It only checks what my evidence says. It passed my PR on 2026-11-05, and CI still failed on 2026-11-06, because nothing in my evidence covered CI.
+plan-check: It warns but can't make me act. It flagged `fs.dropboxfs` on 2026-11-04 as a side note outside its verdict, and I didn't follow it up.
