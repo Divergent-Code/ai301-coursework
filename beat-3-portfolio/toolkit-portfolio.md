@@ -202,7 +202,27 @@ required checks pass."
 One line each for the rest of the toolkit: what it is and where it
 stands (one bullet per tool; a compact sentence or two is fine).
 
-- [Tool name: one line.]
+- **issue-select:** my Unit 1 tool, which grades whether an issue is a
+  good first issue. In Unit 5, issue-scout was installed on top of it, so
+  its rubric became the scout's, and 6 of its 7 checks still have the
+  same names there.
+- **repro-check:** grades my claim comment and repro report before I post
+  them. I used it for real twice: it accepted my galaxy claim on
+  2026-10-29 and my repro report on 2026-11-04. On the claim, it flagged
+  one line as close to my rule "promise the look, not the fix".
+- **voice guard:** holds my comment or PR text against my voice guide
+  before `gh` posts it. It passed my galaxy claim, my findings comment and
+  my PR. It stopped the claim once because it couldn't read the body
+  file, and the retry passed.
+- **galaxy memory file:** `CLAUDE.local.md` in my galaxy clone, with
+  galaxy's conventions, the Dropbox code and its commands. It's 59 lines,
+  and every command in it ran on 2026-11-04.
+- **ship-gate:** stops `gh pr create` until my 4 manifest checks and my
+  pr-precheck pass. It blocked my PR once, on 2026-11-05 at 19:18, passed
+  a minute later, and the PR opened through it at 19:24.
+- **PR monitor:** reads my PR's state and drafts my next move from my
+  playbook. On 2026-11-05 it drafted WAIT, and the first nudge date is
+  around 2026-11-13 if the PR is still quiet.
 
 ## The Arc
 
