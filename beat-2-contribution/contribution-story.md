@@ -459,8 +459,11 @@ skips in CI.
 **Maintainer Feedback:**
 
 - 2026-11-05: none yet
+- 2026-11-24: mvdbeek merged it into `release_25.1`, with no review
+  comments. CI ran on the second commit first, and every job that ran
+  passed.
 
-**Status:** Awaiting review
+**Status:** Merged
 
 **Toolkit**
 
